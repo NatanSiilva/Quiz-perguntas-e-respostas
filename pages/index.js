@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -9,27 +9,19 @@ import QuizLogo from '../src/components/QuizLogo';
 import Footer from '../src/components/Footer';
 import GitHubCorner from '../src/components/GitHubCorner';
 import QuizBackground from '../src/components/QuizBackground';
+import Input from '../src/components/Input';
+import Button from '../src/components/Button';
+import QuizContainer from '../src/components/QuizContainer';
 
 const Title = styled.h1`
   font-size: 50px;
   color: ${({ theme }) => theme.colors.primary};
 `;
 
-export const QuizContainer = styled.div`
-  width: 100%;
-  max-width: 350px;
-  padding-top: 54px;
-  margin: auto 10%;
-  @media screen and (max-width: 500px) {
-    margin:auto;
-    padding: 15px;
-  }
-`;
-
 export default function Home() {
-  const router = useRouter()
-  const [ name, setName ] = React.useState('');
-  console.log('retorno do useState', name)
+  const router = useRouter();
+  const [name, setName] = React.useState('');
+  console.log('retorno do useState', name);
 
   return (
     <QuizBackground backgroundImage={db.bg}>
@@ -45,22 +37,23 @@ export default function Home() {
           <Widget.Content>
             <form onSubmit={(event) => {
               event.preventDefault();
-              router.push(`/quizz?name=${name}`)
+              router.push(`/quizz?name=${name}`);
               console.log('Fazendo uma submissão por meio do react');
-            }}>
-              <input
+            }}
+            >
+              <Input
+                name="nomeDoUsuario"
                 onChange={(event) => {
-                  console.log(event.target.value)
+                  console.log(event.target.value);
                   // state
-                  //name = event.target.value
-                  setName(event.target.value)
-                }} 
+                  // name = event.target.value
+                  setName(event.target.value);
+                }}
                 placeholder="Digite o seu nome"
               />
-              <button type="submit" disabled={ name.length === 0 }>
-                jogar 
-                {name}
-              </button>
+              <Button type="submit" disabled={name.length === 0}>
+                {`Jogar ${name}`}
+              </Button>
             </form>
           </Widget.Content>
         </Widget>
